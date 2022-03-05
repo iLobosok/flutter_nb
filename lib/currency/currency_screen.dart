@@ -30,9 +30,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                         child: CardUI(
                       nameCur: data.data![index].curName,
                       priceCur: data.data![index].curOfficialRate,
-                    )
-                        //Text(data.data![index].curNameEng),
-                        ),
+                    )),
                   );
                 },
               );
@@ -57,7 +55,7 @@ Widget CardUI({
         children: <Widget>[
           Text(nameCur),
           const Spacer(),
-          Text('$priceCur'),
+          Text(priceCur.toString()),
         ],
       ),
     ),
