@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Data {
+class Datavalue {
   final int curId;
   final int curParenId;
   final String curCode;
@@ -18,7 +18,7 @@ class Data {
   final int curPEriodicity;
   final String curDateStart;
   final String curDateEnd;
-  Data({
+  Datavalue({
     required this.curId,
     required this.curParenId,
     required this.curCode,
@@ -38,7 +38,7 @@ class Data {
     required this.curDateEnd,
   });
 
-  Data copyWith({
+  Datavalue copyWith({
     int? Cur_ID,
     int? Cur_ParentID,
     String? Cur_Code,
@@ -57,7 +57,7 @@ class Data {
     String? Cur_DateStart,
     String? Cur_DateEnd,
   }) {
-    return Data(
+    return Datavalue(
       curId: Cur_ID ?? this.curId,
       curParenId: Cur_ParentID ?? this.curParenId,
       curCode: Cur_Code ?? this.curCode,
@@ -100,8 +100,8 @@ class Data {
     };
   }
 
-  factory Data.fromMap(Map<String, dynamic> map) {
-    return Data(
+  factory Datavalue.fromMap(Map<String, dynamic> map) {
+    return Datavalue(
       curId: map['Cur_ID']?.toInt() ?? 0,
       curParenId: map['Cur_ParentID']?.toInt() ?? 0,
       curCode: map['Cur_Code'] ?? '',
@@ -124,7 +124,8 @@ class Data {
 
   String toJson() => json.encode(toMap());
 
-  factory Data.fromJson(String source) => Data.fromMap(json.decode(source));
+  factory Datavalue.fromJson(String source) =>
+      Datavalue.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -135,7 +136,7 @@ class Data {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Data &&
+    return other is Datavalue &&
         other.curId == curId &&
         other.curParenId == curParenId &&
         other.curCode == curCode &&

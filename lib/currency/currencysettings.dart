@@ -1,0 +1,31 @@
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:flutter_nbn/currency/datavalue.dart';
+
+Future<List<Datavalue>> fetchProcessors1() async {
+  try {
+    final response = await Dio().get(
+      'https://www.nbrb.by/api/exrates/currencies',
+      options: Options(
+        responseType: ResponseType.plain,
+      ),
+    );
+    return List<Datavalue>.from(
+      json
+          .decode(
+            response.data,
+          )
+          .map(
+            (x) => Datavalue.fromMap(x),
+          ),
+    );
+  } on DioError catch (ex) {
+    // Assuming there will be an errorMessage property in the JSON object
+    //if (ex.response?.statusCode == 404) {}
+    throw DioError(
+      requestOptions: ex.requestOptions,
+      error: ex.error,
+      response: ex.response,
+    );
+  }
+}

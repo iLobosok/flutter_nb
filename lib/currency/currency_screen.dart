@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_nbn/currency/data.dart';
-import 'package:flutter_nbn/screenprint/cardui.dart';
+import 'package:flutter_nbn/currency/currencysettings.dart';
+import 'package:flutter_nbn/currency/datavalue.dart';
 
 class CurrencyScreen extends StatefulWidget {
   const CurrencyScreen({Key? key}) : super(key: key);
@@ -11,42 +11,14 @@ class CurrencyScreen extends StatefulWidget {
   State<CurrencyScreen> createState() => _CurrencyScreenState();
 }
 
-Future<List<Data>> fetchProcessors() async {
-  try {
-    final response = await Dio().get(
-      'https://www.nbrb.by/api/exrates/currencies',
-      options: Options(
-        responseType: ResponseType.plain,
-      ),
-    );
-    return List<Data>.from(
-      json
-          .decode(
-            response.data,
-          )
-          .map(
-            (x) => Data.fromMap(x),
-          ),
-    );
-  } on DioError catch (ex) {
-    // Assuming there will be an errorMessage property in the JSON object
-    //if (ex.response?.statusCode == 404) {}
-    throw DioError(
-      requestOptions: ex.requestOptions,
-      error: ex.error,
-      response: ex.response,
-    );
-  }
-}
-
 class _CurrencyScreenState extends State<CurrencyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
-        child: FutureBuilder<List<Data>>(
-          future: fetchProcessors(),
+        child: FutureBuilder<List<Datavalue>>(
+          future: fetchProcessors1(),
           //initialData: InitialData,
           builder: (context, data) {
             if (data.hasData) {
@@ -56,8 +28,8 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                   return Container(
                     child: Center(
                         child: CardUI(
-                      nameCur: data.data![index].curNameEng,
-                      //priceCur: data.data![index].cur,
+                      nameCur: data.data![index].curName,
+                      priceCur: data.data![index].curOfficialRate,
                     )
                         //Text(data.data![index].curNameEng),
                         ),
@@ -76,7 +48,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
 
 Widget CardUI({
   required String nameCur,
-  //required int priceCur,
+  required double priceCur,
 }) {
   return Card(
     color: Colors.white,
@@ -85,7 +57,7 @@ Widget CardUI({
         children: <Widget>[
           Text(nameCur),
           const Spacer(),
-          //Text(priceCur.toString()),
+          Text('$priceCur'),
         ],
       ),
     ),
