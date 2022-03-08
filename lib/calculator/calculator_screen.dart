@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_nbn/currency/currencysettings.dart';
 import 'package:flutter_nbn/currency/datavalue.dart';
 
-class CurrencyScreen extends StatefulWidget {
-  const CurrencyScreen({Key? key}) : super(key: key);
+class CalculatorScreen extends StatefulWidget {
+  const CalculatorScreen({Key? key}) : super(key: key);
 
   @override
-  State<CurrencyScreen> createState() => _CurrencyScreenState();
+  State<CalculatorScreen> createState() => _CalculatorScreenState();
 }
 
-class _CurrencyScreenState extends State<CurrencyScreen> {
+class _CalculatorScreenState extends State<CalculatorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +20,21 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
           //initialData: InitialData,
           builder: (context, data) {
             if (data.hasData) {
+              Center(
+                child: Row(
+                  children: <Widget>[
+                    DropdownButton<String>(
+                      items: data.data!.[index].curName{
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (_) {},
+                    )
+                  ],
+                ),
+              );
               return ListView.builder(
                 itemCount: data.data!.length,
                 itemBuilder: (context, index) {

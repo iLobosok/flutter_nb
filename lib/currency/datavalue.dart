@@ -22,7 +22,7 @@ class Datavalue {
     String? curAbbreviation,
     int? curScale,
     String? curName,
-    double? curOfficialRate,
+    double? CurOfficialRate,
   }) {
     return Datavalue(
       curId: curId ?? this.curId,
@@ -30,7 +30,7 @@ class Datavalue {
       curAbbreviation: curAbbreviation ?? this.curAbbreviation,
       curScale: curScale ?? this.curScale,
       curName: curName ?? this.curName,
-      curOfficialRate: curOfficialRate ?? this.curOfficialRate,
+      curOfficialRate: CurOfficialRate ?? this.curOfficialRate,
     );
   }
 
