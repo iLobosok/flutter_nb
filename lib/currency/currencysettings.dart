@@ -5,7 +5,10 @@ import 'package:flutter_nbn/currency/datavalue.dart';
 Future<List<Datavalue>> fetchProcessors1() async {
   try {
     final response = await Dio().get(
-      'https://www.nbrb.by/api/exrates/currencies',
+      'https://www.nbrb.by/api/exrates/rates',
+      queryParameters: {
+        'periodicity': 0,
+      },
       options: Options(
         responseType: ResponseType.plain,
       ),

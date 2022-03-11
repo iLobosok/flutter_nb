@@ -15,60 +15,19 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     return Scaffold(
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
-        child: FutureBuilder<List<Datavalue>>(
-          future: fetchProcessors1(),
-          //initialData: InitialData,
-          builder: (context, data) {
-            if (data.hasData) {
-              Center(
-                child: Row(
-                  children: <Widget>[
-                    DropdownButton<String>(
-                      items: data.data!.[index].curName{
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (_) {},
-                    )
-                  ],
-                ),
-              );
-              return ListView.builder(
-                itemCount: data.data!.length,
-                itemBuilder: (context, index) {
-                  return Center(
-                      child: CardUI(
-                    nameCur: data.data![index].curName,
-                    priceCur: data.data![index].curOfficialRate,
-                  ));
-                },
-              );
-            } else {
-              return const CircularProgressIndicator();
-            }
-          },
+        child: Center(
+          child: Row(
+            children: const <Widget>[
+              TextField(),
+              Icon(
+                Icons.arrow_right,
+                color: Colors.black,
+              ),
+              TextField(),
+            ],
+          ),
         ),
       ),
     );
   }
-}
-
-Widget CardUI({
-  required String nameCur,
-  required double priceCur,
-}) {
-  return Card(
-    color: Colors.white,
-    child: Center(
-      child: Row(
-        children: <Widget>[
-          Text(nameCur),
-          const Spacer(),
-          Text(priceCur.toString()),
-        ],
-      ),
-    ),
-  );
 }

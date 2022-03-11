@@ -13,28 +13,25 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: FutureBuilder<List<Datavalue>>(
-          future: fetchProcessors1(),
-          //initialData: InitialData,
-          builder: (context, data) {
-            if (data.hasData) {
-              return ListView.builder(
-                itemCount: data.data!.length,
-                itemBuilder: (context, index) {
-                  return Center(
-                      child: CardUI(
-                    nameCur: data.data![index].curName,
-                    priceCur: data.data![index].curOfficialRate,
-                  ));
-                },
-              );
-            } else {
-              return const CircularProgressIndicator();
-            }
-          },
-        ),
+      body: FutureBuilder<List<Datavalue>>(
+        future: fetchProcessors1(),
+        //initialData: InitialData,
+        builder: (context, data) {
+          if (data.hasData) {
+            return ListView.builder(
+              itemCount: data.data!.length,
+              itemBuilder: (context, index) {
+                return Center(
+                    child: CardUI(
+                  nameCur: data.data![index].curName,
+                  priceCur: data.data![index].curOfficialRate,
+                ));
+              },
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }

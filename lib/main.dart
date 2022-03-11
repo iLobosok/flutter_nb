@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'calculator/calculator_screen.dart';
 import 'currency/currency_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -31,10 +32,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     CurrencyScreen(),
-    Text(
-      'Calculator',
-      style: optionStyle,
-    ),
+    CalculatorScreen(),
   ];
 
   void _onItemTapped(int index) {
